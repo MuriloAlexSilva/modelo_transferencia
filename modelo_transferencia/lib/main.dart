@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:modelo_transferencia/views/page_transferencia.dart';
+import 'package:modelo_transferencia/views/page_listaTransferencia.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.light(),
-      home: PageTransferencia(),
+      home: ListaTransferencia(),
     );
   }
 }

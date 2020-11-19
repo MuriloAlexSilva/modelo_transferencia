@@ -5,6 +5,20 @@ class PageTransferencia extends StatelessWidget {
   final TextEditingController _controllerNumeroConta = TextEditingController();
   final TextEditingController _controllerValor = TextEditingController();
 
+  //Seria para criar uma função
+  void _criaTransferencia(BuildContext context) {
+    //Para enviar o context
+    final int numeroConta =
+        int.tryParse(_controllerNumeroConta.text); //Para converter em int
+    final double valor =
+        double.tryParse(_controllerValor.text); //Para converter em double
+    if (numeroConta != null && valor != null) {
+      final transferenciaCriada = Transferencia(valor, numeroConta);
+      print("$transferenciaCriada");
+      Navigator.pop(context, transferenciaCriada);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +46,8 @@ class PageTransferencia extends StatelessWidget {
             ),
             RaisedButton(
               child: Text("Confirmar"),
-              onPressed: () => _criaTransferencia(),
+              onPressed: () =>
+                  _criaTransferencia(context), //Para enviar o context
             )
           ],
         ),
@@ -77,17 +92,5 @@ class Editor extends StatelessWidget {
             ),
       ),
     );
-  }
-}
-
-//Seria para criar uma função
-void _criaTransferencia() {
-  final int numeroConta =
-      int.tryParse(_controllerNumeroConta.text); //Para converter em int
-  final double valor =
-      double.tryParse(_controllerValor.text); //Para converter em double
-  if (numeroConta != null && valor != null) {
-    final transferenciaCriada = Transferencia(valor, numeroConta);
-    print("$transferenciaCriada");
   }
 }
