@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:modelo_transferencia/views/page_transferencia.dart';
 
 class ListaTransferencia extends StatelessWidget {
+  final List<Transferencia> _transferencias = List();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,8 +14,14 @@ class ListaTransferencia extends StatelessWidget {
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        child: ListView(
-          children: [],
+        child: ListView.builder(
+          itemCount: _transferencias.length,
+          itemBuilder: (context, index) {
+            final transferencia = _transferencias[index];
+            return ItemTransferencia(
+              transferencia: transferencia,
+            );
+          },
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -34,8 +42,29 @@ class ListaTransferencia extends StatelessWidget {
           );
           //future que irá receber o context
           future.then(
-              (transferenciaRecebida) => debugPrint("$transferenciaRecebida"));
+            (transferenciaRecebida) {
+              debugPrint("$transferenciaRecebida");
+              _transferencias.add(transferenciaRecebida);
+            },
+          );
         },
+      ),
+    );
+  }
+}
+
+class ItemTransferencia extends StatelessWidget {
+  final Transferencia transferencia;
+
+  const ItemTransferencia({Key key, this.transferencia}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: ListTile(
+        leading: Icon(Icons.monetization_on),
+        title: Text(transferencia.valor.toString()),
+        subtitle: Text(transferencia.numeroConta.toString()),
       ),
     );
   }
