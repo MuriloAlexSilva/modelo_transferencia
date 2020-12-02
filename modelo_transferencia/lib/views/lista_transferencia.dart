@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:modelo_transferencia/views/page_transferencia.dart';
+import 'package:modelo_transferencia/models/transferencia.dart';
+import 'package:modelo_transferencia/views/formulario.dart';
 
 class ListaTransferencia extends StatefulWidget {
   @override
@@ -12,6 +13,7 @@ class _ListaTransferenciaState extends State<ListaTransferencia> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         title: Text("Lista Transferência"),
         centerTitle: true,
@@ -73,10 +75,11 @@ class ItemTransferencia extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Theme.of(context).buttonColor,
       child: ListTile(
         leading: Icon(Icons.monetization_on),
-        title: Text(transferencia.valor.toString()),
-        subtitle: Text(transferencia.numeroConta.toString()),
+        title: Text("Conta: ${transferencia.numeroConta.toString()}"),
+        subtitle: Text("Saldo: \$ ${transferencia.valor.toString()}0"),
       ),
     );
   }
