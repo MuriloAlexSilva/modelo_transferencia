@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 
-class PageTransferencia extends StatelessWidget {
+class PageTransferencia extends StatefulWidget {
   //Controllers para capturar os dados dos TextField
+  @override
+  _PageTransferenciaState createState() => _PageTransferenciaState();
+}
+
+class _PageTransferenciaState extends State<PageTransferencia> {
   final TextEditingController _controllerNumeroConta = TextEditingController();
+
   final TextEditingController _controllerValor = TextEditingController();
 
-  //Seria para criar uma função
   void _criaTransferencia(BuildContext context) {
     //Para enviar o context
     final int numeroConta =
@@ -32,24 +37,26 @@ class PageTransferencia extends StatelessWidget {
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        child: Column(
-          children: [
-            Editor(
-                controlador: _controllerNumeroConta,
-                rotulo: "Numero da Conta",
-                dica: "0000"),
-            Editor(
-              controlador: _controllerValor,
-              rotulo: "Valor",
-              dica: "00.00",
-              icone: Icons.monetization_on,
-            ),
-            RaisedButton(
-              child: Text("Confirmar"),
-              onPressed: () =>
-                  _criaTransferencia(context), //Para enviar o context
-            )
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Editor(
+                  controlador: _controllerNumeroConta,
+                  rotulo: "Numero da Conta",
+                  dica: "0000"),
+              Editor(
+                controlador: _controllerValor,
+                rotulo: "Valor",
+                dica: "00.00",
+                icone: Icons.monetization_on,
+              ),
+              RaisedButton(
+                child: Text("Confirmar"),
+                onPressed: () =>
+                    _criaTransferencia(context), //Para enviar o context
+              )
+            ],
+          ),
         ),
       ),
     );

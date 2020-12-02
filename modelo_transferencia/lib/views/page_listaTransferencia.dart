@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:modelo_transferencia/views/page_transferencia.dart';
 
-class ListaTransferencia extends StatelessWidget {
+class ListaTransferencia extends StatefulWidget {
+  @override
+  _ListaTransferenciaState createState() => _ListaTransferenciaState();
+}
+
+class _ListaTransferenciaState extends State<ListaTransferencia> {
   final List<Transferencia> _transferencias = List();
 
   @override
@@ -43,8 +48,15 @@ class ListaTransferencia extends StatelessWidget {
           //future que irá receber o context
           future.then(
             (transferenciaRecebida) {
-              debugPrint("$transferenciaRecebida");
-              _transferencias.add(transferenciaRecebida);
+              Future.delayed(Duration(seconds: 2), () {
+                debugPrint("$transferenciaRecebida");
+                // O if abaixo seria para contornar o erro ao retornar a tela sem valor
+                if (transferenciaRecebida != null) {
+                  setState(() {
+                    _transferencias.add(transferenciaRecebida);
+                  });
+                }
+              });
             },
           );
         },
