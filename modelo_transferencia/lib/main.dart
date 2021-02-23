@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:modelo_transferencia/views/dashboard.dart';
 import 'package:modelo_transferencia/views/lista_transferencia.dart';
 
 void main() {
@@ -20,7 +21,11 @@ class MyApp extends StatelessWidget {
           buttonColor: Colors.teal[300],
         ),
       ),
-      home: ListaTransferencia(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => Dashboard(),
+        '/listaTransferencia': (context) => ListaTransferencia(),
+      },
     );
   }
 }

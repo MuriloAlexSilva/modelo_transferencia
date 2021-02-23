@@ -15,6 +15,7 @@ class Editor extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: TextField(
+        keyboardType: TextInputType.number,
         controller: controlador,
         style: TextStyle(fontSize: 24),
         decoration: InputDecoration(
