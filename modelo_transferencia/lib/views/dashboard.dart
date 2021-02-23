@@ -19,6 +19,10 @@ class Dashboard extends StatelessWidget {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.save_alt),
+        onPressed: () => Navigator.of(context).pushNamed("/listaTransferencia"),
+      ),
     );
   }
 }
