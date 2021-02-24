@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:modelo_transferencia/models/transferencia.dart';
-import 'package:modelo_transferencia/views/formulario.dart';
+import 'package:modelo_transferencia/views/transferencia.dart';
 
 class ListaTransferencia extends StatefulWidget {
   @override
@@ -43,7 +43,7 @@ class _ListaTransferenciaState extends State<ListaTransferencia> {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return PageTransferencia();
+                return;
               },
             ),
           );

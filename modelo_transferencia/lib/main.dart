@@ -1,9 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:modelo_transferencia/models/transferencias.dart';
 import 'package:modelo_transferencia/views/dashboard.dart';
-import 'package:modelo_transferencia/views/lista_transferencia.dart';
+import 'package:modelo_transferencia/views/deposito.dart';
+import 'package:modelo_transferencia/views/transferencia.dart';
+import 'package:provider/provider.dart';
+
+import 'models/saldoModel.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MultiProvider(
+    //Aqui será colocado a var que será utilizada em toda a app
+    providers: [
+      ChangeNotifierProvider(
+        create: (context) => Saldo(valor: 0),
+      ),
+      ChangeNotifierProvider(
+        create: (context) => Transferencias(),
+      ),
+    ],
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -24,7 +40,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => Dashboard(),
-        '/listaTransferencia': (context) => ListaTransferencia(),
+        '/transferencia': (context) => PageTransferencia(),
+        '/deposito': (context) => Deposito(),
       },
     );
   }

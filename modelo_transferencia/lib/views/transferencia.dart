@@ -1,30 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:modelo_transferencia/components/editor.dart';
+import 'package:modelo_transferencia/models/saldoModel.dart';
 import 'package:modelo_transferencia/models/transferencia.dart';
+import 'package:modelo_transferencia/models/transferencias.dart';
+import 'package:provider/provider.dart';
 
-class PageTransferencia extends StatefulWidget {
-  //Controllers para capturar os dados dos TextField
-  @override
-  _PageTransferenciaState createState() => _PageTransferenciaState();
-}
-
-class _PageTransferenciaState extends State<PageTransferencia> {
+class PageTransferencia extends StatelessWidget {
   final TextEditingController _controllerNumeroConta = TextEditingController();
 
   final TextEditingController _controllerValor = TextEditingController();
-
-  void _criaTransferencia(BuildContext context) {
-    //Para enviar o context
-    final int numeroConta =
-        int.tryParse(_controllerNumeroConta.text); //Para converter em int
-    final double valor =
-        double.tryParse(_controllerValor.text); //Para converter em double
-    if (numeroConta != null && valor != null) {
-      final transferenciaCriada = Transferencia(valor, numeroConta);
-      print("$transferenciaCriada");
-      Navigator.pop(context, transferenciaCriada);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,5 +47,24 @@ class _PageTransferenciaState extends State<PageTransferencia> {
         ),
       ),
     );
+  }
+
+  void _criaTransferencia(BuildContext context) {
+    //Para enviar o context
+    final int numeroConta =
+        int.tryParse(_controllerNumeroConta.text); //Para converter em int
+    final double valor =
+        double.tryParse(_controllerValor.text); //Para converter em double
+    if (numeroConta != null && valor != null) {
+      final novaTransferencia = Transferencia(valor, numeroConta);
+      _validaEstado(context, novaTransferencia, valor);
+      Navigator.pop(context);
+    }
+  }
+
+  _validaEstado(context, novaTransferencia, valor) {
+    Provider.of<Transferencias>(context, listen: false)
+        .adiciona(novaTransferencia);
+    Provider.of<Saldo>(context, listen: false).subtrair(valor);
   }
 }
